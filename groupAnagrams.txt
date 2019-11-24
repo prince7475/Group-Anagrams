@@ -1,0 +1,99 @@
+Write a function that takes in an array of strings and returns a list of groups of anagrams.
+
+example: ["yo", "act", "flop", "tac", "cat", "oy", "olfp"]
+output : [["yo", "oy"],["flop", "olfp"],["act", "tac", "cat"]]
+
+
+Time --> O(n * (elog(e)))
+Space -> O(n)
+Main(arr)
+- hashMap = {
+  "ab" : ["ba"]
+}
+
+for(let i = 0; i < arr.length; i++){
+  let letter = arr[i]
+  let sortedLetter = getSortedLetter(letter) // Helper
+  if(!(sortedLetter in hashMap)) hashMap[sortedLetter] = []
+  hashMap[sortedLetter].push(letter)
+}
+let result = []
+
+for(key in hashMap){
+  result.push(hashMap[key].concat())
+}
+return result
+
+
+helper(string) {
+  let alp = "abcdefghijklmnopqrstuvwxyz".split("")
+  let arr = []
+  for(let i = 0; i < string.length; i++){
+    let letter = string[i]
+    arr.push(alp.indexOf(letter))
+  }
+  
+  arr.sort((a,b) => a - b)
+  let result = ""
+  for(let idx of arr){
+    result += alp[idx]
+  }
+  
+  return result
+}
+
+
+
+
+
+
+
+function groupAnagrams(words){
+  let hashMap = {}
+  for(let word of words){
+    let sortedWord = getSortedWord(word) // helper
+    if(!(sortedWord in hashMap)) hashMap[sortedWord] = []
+    hashMap[sortedWord].push(word)
+  }
+  
+  let result = []
+  for(let key in hashMap){
+    result.push(hashMap[key].concat())
+  }
+  return result
+}
+
+function getSortedWord(string){
+ let alp =  "abcdefghijklmnopqrstuvwxyz".split("")
+ let arr = []
+ for(let i = 0; i < string.length; i++){
+  let letter = string[i]
+  arr[i] = alp.indexOf(letter)
+ }
+ 
+ arr.sort((a,b) => a - b)
+  let result = ""
+  for(const idx of arr){
+    result += alp[idx]
+  }
+ return result
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
